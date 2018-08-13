@@ -20,6 +20,19 @@ function TodoController () {
         completed: true
         }
     ];
+    vm.addTask = (newTask) => {
+        vm.list.push({
+            task: newTask,
+            completed: false
+        });
+        console.log(newTask);
+    }
+    vm.removeTask = (index) => {
+        vm.list.splice(index, 1);
+    }
+    vm.completeTask = (index) => {
+        vm.list[index].completed = true;
+    }
 }
 
 angular

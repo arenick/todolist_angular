@@ -14,12 +14,13 @@
     <form class="form">
         <h4>TO DO List</h4>
         <h5>A place to store the things you have to do!</h5>
-        <input type="text" placeholder="Filter your to-do's">
+        <input type="text" placeholder="Filter your to-do's" ng-model="filterToDo">
             <ol>
-                <li ng-repeat="item in toDo.list" ng-class="{complete_item:item.completed}"><button type="button"  ng-if="item.completed === false" class="complete_button">Complete</button>{{ item.task }}<i class="material-icons">clear</i></li>
+                <li ng-repeat="item in toDo.list | filter:filterToDo track by $index" ng-class="{complete_item:item.completed}">
+                <button type="button"  ng-if="item.completed === false" class="complete_button" ng-click="toDo.completeTask($index)">Complete</button>{{ item.task }}<i ng-click="toDo.removeTask($index)"class="material-icons">clear</i></li>
             </ol>
-        <input type="text" placeholder="Add your to do's">
-        <button type="button" class="add_button">Add</button>
+        <input type="text" placeholder="Add your to do's" ng-model="task">
+        <button type="button" class="add_button" ng-click="toDo.addTask(task); task='';">Add</button>
     </form>
 </section>
     <script src="https://code.angularjs.org/1.6.5/angular.js"></script>
